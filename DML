@@ -1,0 +1,124 @@
+-- 1. CIUDAD
+INSERT INTO ciudad (ciudad_id, nombre, codigo_postal) VALUES
+(1, 'Bogotá', '110111'),
+(2, 'Medellín', '050021'),
+(3, 'Cali', '760001'),
+(4, 'Barranquilla', '080001'),
+(5, 'Cartagena', '130001'),
+(6, 'Bucaramanga', '680001'),
+(7, 'Pereira', '660001'),
+(8, 'Manizales', '170001'),
+(9, 'Santa Marta', '470001'),
+(10, 'Cúcuta', '540001');
+ 
+-- 2. SERVICIO
+INSERT INTO servicio (servicio_id, nombre, descripcion, estado) VALUES
+(1, 'Consultoria', 'Servicio de consultoria y asesoria financiera', 'Activo'),
+(2, 'Credito', 'Credito financiero', 'Activo'),
+(3, 'Seguro', 'Seguros de vida, salud, automóviles, vivienda', 'Inactivo'),
+(4, 'Pago/transferencia', 'Servicios de pagos y transferencias financieras', 'Activo'),
+(5, 'Financiamiento inmobiliario', 'Préstamos para compra, construcción o remodelación de viviendas', 'Activo'),
+(6, 'Inversión', 'Fondos de inversión y gestión de activos', 'Activo'),
+(7, 'Divisas', 'Compra y venta de monedas extranjeras', 'Inactivo'),
+(8, 'Banca Comercial', 'Servicios de cuentas de ahorro, cuentas corrientes', 'Activo'),
+(9, 'Fintech', 'billeteras electrónicas, criptomonedas y banca móvi', 'Activo'),
+(10, 'Capital de riesgo', 'Inversiones en startups o empresas en crecimiento', 'Activo');
+
+
+-- 3. TIPO_USUARIO
+INSERT INTO tipo_usuario (tipo_id, nombre) VALUES
+(1, 'Cliente'),
+(2, 'Proveedor');
+ 
+-- 4. USUARIO
+INSERT INTO usuario (usuario_id, nombre, apellido, condicion, ciudad_id, tipo_id) VALUES
+(1, 'Carlos', 'Pérez', 'n/a', 1, 2),
+(2, 'María', 'Gómez', 'n/a', 2, 2),
+(3, 'Andrés', 'López', 'adulto mayor', 3, 1),
+(4, 'Luisa', 'Martínez', 'embarazo', 4, 1),
+(5, 'Jorge', 'Ramírez', 'n/a', 5, 1),
+(6, 'Ana', 'Rodríguez', 'silla de ruedas', 6, 1),
+(7, 'Pedro', 'García', 'embarazo', 7, 1),
+(8, 'Sofía', 'Jiménez', 'n/a', 8, 2),
+(9, 'Laura', 'Hernández', 'n/a', 9, 2),
+(10, 'Miguel', 'Torres', 'n/a', 10, 1);
+ 
+
+-- 5. SOLICITA_SERVICIO
+INSERT INTO solicita_servicio (usuario_id, servicio_id) VALUES
+(1, 1),
+(2, 2),
+(3, 5),
+(4, 4),
+(5, 5),
+(6, 6),
+(7, 6),
+(8, 8),
+(9, 9),
+(10, 10);
+ 
+-- 6. DEPARTAMENTO
+INSERT INTO departamento (departamento_id, nombre) VALUES
+(1, 'Recursos Humanos'),
+(2, 'Finanzas'),
+(3, 'Riesgos'),
+(4, 'Comercial'),
+(5, 'Logistica'),
+(6, 'Sistemas'),
+(7, 'Banca y operaciones'),
+(8, 'Marketing'),
+(9, 'Auditoria Interna'),
+(10, 'Operaciones');
+ 
+-- 7. CARGO
+INSERT INTO cargo (cargo_id, nombre) VALUES
+(1, 'Gerente'),
+(2, 'Director'),
+(3, 'Analista'),
+(4, 'Asesor'),
+(5, 'Auditor'),
+(6, 'Asistente'),
+(7, 'Técnico'),
+(8, 'Ingeniero'),
+(9, 'Administrador'),
+(10, 'Auxiliar');
+ 
+-- 8. EMPLEADO
+INSERT INTO empleado (empleado_id, nombre, departamento_id, cargo_id) VALUES
+(1, 'Juan Díaz', 1, 1),
+(2, 'Camila Ruiz', 2, 2),
+(3, 'Santiago Mora', 3, 10),
+(4, 'Daniela Castro', 4, 10),
+(5, 'Ricardo Peña', 10, 10),
+(6, 'Valentina Soto', 6, 8),
+(7, 'Felipe Arias', 7, 4),
+(8, 'Tatiana Gil', 3, 3),
+(9, 'Esteban León', 4, 4),
+(10, 'Lucía Vega', 3, 10);
+ 
+
+-- 9. TURNO
+INSERT INTO turno (turno_id, fecha, hora_inicio, hora_fin, servicio_id, empleado_id) VALUES
+(1, '2025-10-18 08:00:00', '08:00:00', '08:20:00', 1, 4), -- Servicio consultoría
+(2, '2025-10-18 09:00:00', '09:00:00', '09:15:00', 2, 9), -- Servicio Credito
+(3, '2025-10-18 10:00:00', '10:00:00', '10:35:00', 5, 3), -- Servicio financiamiento
+(4, '2025-10-18 08:00:00', '08:30:00', '08:40:00', 4, 4), -- Servicio de Pago
+(5, '2025-10-18 11:00:00', '11:00:00', '11:10:00', 5, 3), -- Servicio financiamiento
+(6, '2025-10-18 07:00:00', '08:00:00', '08:30:00', 6, 7), -- Servicio de inversión
+(7, '2025-10-18 08:00:00', '09:00:00', '09:14:00', 6, 8), -- Servicio de inversión
+(8, '2025-10-18 09:00:00', '09:00:00', '07:17:00', 8, 9), -- Servicio de banca
+(9, '2025-10-18 13:00:00', '13:00:00', '13:20:00', 9, 10), -- Servicio de Fintech
+(10, '2025-10-18 14:00:00', '14:00:00', '14:10:00', 10, 5); -- Servicio de riesgo
+ 
+-- 10. NOTIFICACION
+INSERT INTO notificacion (notificacion_id, usuario_id, estado, fecha_envio, mensaje, medio) VALUES
+(1, 1, 'Enviado', '2025-10-17 10:30:00', 'Su solicitud de pago ha sido procesada con éxito.', 1),
+(2, 2, 'Pendiente', '2025-10-17 11:00:00', 'Su crédito está en evaluación. Le notificaremos pronto.', 1),
+(3, 3, 'Enviado', '2025-10-17 09:45:00', 'Actualización: su servicio de financiamiento ha sido aprobado.', 2),
+(4, 4, 'Enviado', '2025-10-17 08:15:00', 'Recordatorio: su turno de pago está programado para hoy.', 3),
+(5, 5, 'Enviado', '2025-10-17 12:00:00', 'Gracias por usar nuestro servicio de financiamiento inmobiliario.', 1),
+(6, 6, 'Pendiente', '2025-10-17 15:30:00', 'Su inversión se encuentra en revisión.', 2),
+(7, 7, 'Enviado', '2025-10-17 16:45:00', 'Su inversión se encuentra en revisión.', 3),
+(8, 8, 'Enviado', '2025-10-17 17:00:00', 'Su cuenta de ahorros ha sido activada.', 1),
+(9, 9, 'Enviado', '2025-10-17 14:30:00', 'Nueva actualización en su servicio Fintech.', 3),
+(10, 10, 'Enviado', '2025-10-17 13:15:00', 'Confirmación: su inversión de capital de riesgo fue recibida.', 1);
