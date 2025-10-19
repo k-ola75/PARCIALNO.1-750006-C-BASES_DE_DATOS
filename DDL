@@ -1,0 +1,78 @@
+CREATE TABLE ciudad(
+  ciudad_id INTEGER PRIMARY KEY,
+  nombre VARCHAR(100),
+  codigo_postal VARCHAR(100)
+);
+ 
+CREATE TABLE servicio(
+  servicio_id INTEGER PRIMARY KEY,
+  nombre VARCHAR(100),
+  descripcion VARCHAR(100),
+  estado VARCHAR(100)
+);
+ 
+CREATE TABLE tipo_usuario(
+  tipo_id INTEGER PRIMARY KEY,
+  nombre VARCHAR(100)
+);
+ 
+
+CREATE TABLE usuario(
+  usuario_id INTEGER PRIMARY KEY,
+  nombre VARCHAR(100),
+  apellido VARCHAR(100),
+  condicion VARCHAR(100),
+  ciudad_id INTEGER,
+  tipo_id INTEGER,
+  FOREIGN KEY (ciudad_id) REFERENCES ciudad(ciudad_id),
+  FOREIGN KEY (tipo_id) REFERENCES tipo_usuario(tipo_id)
+);
+ 
+CREATE TABLE solicita_servicio(
+  usuario_id INTEGER,
+  servicio_id INTEGER,
+  PRIMARY KEY (usuario_id, servicio_id),
+  FOREIGN KEY (usuario_id) REFERENCES usuario(usuario_id),
+  FOREIGN KEY (servicio_id) REFERENCES servicio(servicio_id)
+);
+ 
+CREATE TABLE departamento(
+  departamento_id INTEGER PRIMARY KEY,
+  nombre VARCHAR(100)
+);
+ 
+CREATE TABLE cargo(
+  cargo_id INTEGER PRIMARY KEY,
+  nombre VARCHAR(100)
+);
+ 
+create table empleado(
+  empleado_id INTEGER PRIMARY KEY,
+  nombre VARCHAR(100),
+  departamento_id INTEGER,
+  cargo_id INTEGER,
+  FOREIGN KEY (departamento_id) REFERENCES departamento(departamento_id),
+  FOREIGN KEY (cargo_id) REFERENCES cargo(cargo_id)
+);
+ 
+CREATE TABLE turno(
+  turno_id INTEGER PRIMARY KEY,
+  fecha TIMESTAMP,
+  hora_inicio TIME,
+  hora_fin TIME,
+  servicio_id INTEGER,
+  empleado_id INTEGER,
+  FOREIGN KEY (servicio_id) REFERENCES servicio(servicio_id),
+  FOREIGN KEY (empleado_id) REFERENCES empleado(empleado_id)
+);
+ 
+CREATE TABLE notificacion(
+  notificacion_id INTEGER,
+  usuario_id INTEGER,
+  estado VARCHAR(100),
+  fecha_envio TIMESTAMP,
+  mensaje VARCHAR(500),
+  medio INTEGER,
+  PRIMARY KEY (notificacion_id, usuario_id),
+  FOREIGN KEY (usuario_id) REFERENCES usuario(usuario_id)
+);
